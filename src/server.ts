@@ -29,6 +29,8 @@ app.get('/db/create', DBController.create)
 app.get('/cidades/create', CidadeController.create)
 app.get('/cidades/findAll', CidadeController.findAll)
 app.get('/cidades/findById/:id', CidadeController.findById)
+app.get('/cidades/createCidade', CidadeController.createCidade)
+app.get('/cidades/findByNome', CidadeController.findByNome)
 
 
 app.listen(3333, () => console.log('Running'));

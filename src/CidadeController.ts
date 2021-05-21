@@ -4,8 +4,8 @@ import getClient from './client/elasticsearch';
 
 class CidadeController {
 
-  async create(request: Request, response: Response) {
-    
+  async create(request: Request, response: Response) {  
+
     const client = new Client({
       host:'192.168.99.100',//ip no docker
       port: 5432,
@@ -58,6 +58,40 @@ class CidadeController {
     });
 
     return response.json(data.hits.hits);
+  }
+
+  async createCidade(request: Request, response: Response) {
+    const cidade = {
+      "id": 5569,
+      "ibge": 5222305,
+      "nome": "Potiguiana",
+      "estados_id": 23,
+      "capital": null
+    }
+
+    const data = await getClient().index({
+      index: 'cidades',
+      type: 'type_cidades',
+      body: cidade
+    });
+
+    return response.json(data);
+  }
+
+  async findByNome(request: Request, response: Response) {
+
+    const data = await getClient().search({
+      index: 'cidades',
+      body: {
+        query: {
+          match: {
+            nome: 'oeste'
+          }
+        }
+      }
+    });
+
+    return response.json(data);
   }
 
 }
