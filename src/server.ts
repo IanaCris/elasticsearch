@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import getClient from './client/elasticsearch';
 import DBController from './DBController';
-import PhotoController from './PhotoController';
+import CidadeController from './CidadeController';
 
 const app = express();
 
@@ -24,6 +24,11 @@ app.get('/', async (request: Request, response: Response) => {
 
   return response.json(result);
 })
+
+app.get('/db/create', DBController.create)
+app.get('/cidades/create', CidadeController.create)
+app.get('/cidades/findAll', CidadeController.findAll)
+app.get('/cidades/findById/:id', CidadeController.findById)
 
 
 app.listen(3333, () => console.log('Running'));
